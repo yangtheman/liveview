@@ -2,6 +2,7 @@ defmodule Liveview.LocationController do
   use Liveview.Web, :controller
 
   alias Liveview.Location
+  alias Liveview.Expert
 
   def index(conn, _params) do
     locations = Repo.all(Location)

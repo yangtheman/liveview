@@ -1,13 +1,13 @@
-defmodule Liveview.Location do
+defmodule Liveview.Market do
   use Liveview.Web, :model
   use Ecto.Schema
 
-  schema "locations" do
+  schema "markets" do
+    field :name, :string
     field :lat, :float
     field :lng, :float
-    field :timestamp, :naive_datetime
 
-    belongs_to :expert, Liveview.Expert
+    has_many :experts, Liveview.Expert
 
     timestamps()
   end
@@ -17,7 +17,7 @@ defmodule Liveview.Location do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:expert_id, :lat, :lng, :timestamp])
-    |> validate_required([:expert_id, :lat, :lng, :timestamp])
+    |> cast(params, [:name, :lat, :lng])
+    |> validate_required([:name, :lat, :lng])
   end
 end

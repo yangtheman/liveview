@@ -1,5 +1,6 @@
 defmodule Liveview.LocationChannel do
   use Liveview.Web, :channel
+  import Ecto.Query
 
   def join("location:" <> location_id, payload, socket) do
     if authorized?(payload) do
@@ -28,9 +29,10 @@ defmodule Liveview.LocationChannel do
   end
 
   def broadcast_new_location(location) do
+    expert = Liveview.Repo.get(Liveview.Expert, location.expert_id)
     payload = %{
-      expert_id: location.expert_id,
-      expert_name: "Joe Blow",
+      expert_id: expert.id,
+      expert_name: expert.fullname,
       lat: location.lat,
       lng: location.lng,
       timestamp: location.timestamp,

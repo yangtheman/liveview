@@ -4,15 +4,10 @@ html, body {
   margin: 0;
 }
 
-.chat {
- margin-top: 0em;
-}
-.chat-room {
- margin-top: 1em;
-}
 .panel-messages, .panel-users {
  height: 400px;
 }
+
 #chat-messages {
  min-height: 400px;
  overflow-y: scroll;
@@ -34,4 +29,10 @@ html, body {
   font-weight: bold;
   font-size: 14px;
   color: #eb3a44;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 1170px;
+  }
 }

@@ -58,8 +58,9 @@ let channel = socket.channel("location:lobby", {})
 let message = $('#message-input')
 let nickname = "Nickname"
 let chatMessages = document.getElementById("chat-messages")
+let lastUpdatedAt = document.getElementById("last-updated-at")
 let map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 9,
+  zoom: 10,
   center: {lat: 37.423021, lng: -122.083739}
 });
 let markers = {};
@@ -81,7 +82,7 @@ channel.on('message:new', payload => {
 
 channel.on('location:updated', location => {
   console.log(location);
-  
+
   let marker = new google.maps.Marker({
     position: { lat: location.lat, lng: location.lng },
     map: map,
@@ -94,8 +95,14 @@ channel.on('location:updated', location => {
 
   markers[location.expert_id] = marker
 
+  // Object.keys(markers).forEach(function (key) {
+  //   markers[key].setMap(map);
+  // });
+
+  lastUpdatedAt.innerHTML = `<i>${location.timestamp}</i>`
   marker.setMap(map);
 })
+
 
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })

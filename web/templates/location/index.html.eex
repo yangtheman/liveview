@@ -7,5 +7,9 @@
       <div id="chat-messages" class="panel-body panel-messages"></div>
       <input type="text" id="message-input" class="form-control" placeholder="Type a message…">
     </div>
+    <div>
+      <p><strong>Last Updated at: </strong></p>
+      <p id='last-updated-at'></p>
+    </div>
   </div>
 </div>
