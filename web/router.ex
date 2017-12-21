@@ -16,7 +16,7 @@ defmodule Liveview.Router do
   scope "/", Liveview do
     pipe_through :browser # Use the default browser stack
 
-    resources "/locations", LocationController
+    resources "/markets", MarketController, only: [:show]
 
     get "/", PageController, :index
   end
