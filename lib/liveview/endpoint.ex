@@ -38,5 +38,6 @@ defmodule Liveview.Endpoint do
     key: "_liveview_key",
     signing_salt: "U8OD66nn"
 
+  plug PhoenixGon.Pipeline
   plug Liveview.Router
 end
