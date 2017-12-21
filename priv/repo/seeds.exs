@@ -12,9 +12,13 @@
 import Ecto.Query
 
 Liveview.Repo.insert!(%Liveview.Market{name: "BAY", lat: 37.423021, lng: -122.083739})
+Liveview.Repo.insert!(%Liveview.Market{name: "CHI", lat: 41.876865, lng: -87.623666})
+Liveview.Repo.insert!(%Liveview.Market{name: "DAL", lat: 32.775332, lng: -96.797482})
 
 market = Liveview.Repo.one(from m in Liveview.Market, limit: 1)
 
+Liveview.Repo.insert!(%Liveview.Expert{id: 1, fullname: "Ganaa Norovgachil", market: market})
+Liveview.Repo.insert!(%Liveview.Expert{id: 2, fullname: "Yang Chung", market: market})
 Liveview.Repo.insert!(%Liveview.Expert{id: 56, fullname: "George Alajaji", market: market})
 Liveview.Repo.insert!(%Liveview.Expert{id: 63, fullname: "Lauren Aldredge", market: market})
 Liveview.Repo.insert!(%Liveview.Expert{id: 315, fullname: "Kevin Graham", market: market})
