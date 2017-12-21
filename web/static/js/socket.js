@@ -54,14 +54,15 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("location:lobby", {})
+let gonAssets = window.Gon.assets();
+let channel = socket.channel(`location:${gonAssets.channel_name}`, {})
 let message = $('#message-input')
-let nickname = "Nickname"
+let nickname = gonAssets.username;
 let chatMessages = document.getElementById("chat-messages")
 let lastUpdatedAt = document.getElementById("last-updated-at")
 let map = new google.maps.Map(document.getElementById('map'), {
   zoom: 10,
-  center: {lat: 37.423021, lng: -122.083739}
+  center: {lat: gonAssets.market_lat, lng: gonAssets.market_lng}
 });
 let markers = {};
 
@@ -83,10 +84,13 @@ channel.on('message:new', payload => {
 channel.on('location:updated', location => {
   console.log(location);
 
-  let marker = new google.maps.Marker({
-    position: { lat: location.lat, lng: location.lng },
+  var marker = new MarkerWithLabel({
     map: map,
-    label: location.expert_name,
+    position: { lat: location.lat, lng: location.lng },
+    labelContent: location.expert_name,
+    labelAnchor: new google.maps.Point(50, 60),
+    labelClass: "gmap-label",
+    labelInBackground: true
   });
 
   if (markers[location.expert_id]) {
@@ -94,10 +98,6 @@ channel.on('location:updated', location => {
   }
 
   markers[location.expert_id] = marker
-
-  // Object.keys(markers).forEach(function (key) {
-  //   markers[key].setMap(map);
-  // });
 
   lastUpdatedAt.innerHTML = `<i>${location.timestamp}</i>`
   marker.setMap(map);
