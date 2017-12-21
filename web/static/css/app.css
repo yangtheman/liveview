@@ -18,7 +18,7 @@ html, body {
 }
 
 .gmap-label {
-  width: 50px;
+  width: 100px;
   height: 20px;
 
   border: 1px solid #eb3a44;
@@ -30,6 +30,7 @@ html, body {
   font-size: 14px;
   color: #eb3a44;
 }
+
 
 @media screen and (min-width: 768px) {
   .container {
